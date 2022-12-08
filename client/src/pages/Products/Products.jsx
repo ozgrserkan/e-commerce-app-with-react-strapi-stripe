@@ -8,6 +8,7 @@ const Products = () => {
   const catId = parseInt(useParams().id);
   const [maxPrice, setMaxPrice] = useState(1000);
   const [sort, setSort] = useState(null);
+  
   return (
     <div className="products">
       <div className="left">
