@@ -44,14 +44,9 @@ const Product = () => {
         </div>
       </div>
       <div className="right">
-        <h1>Title</h1>
-        <span className="price">$199</span>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat
-          magnam sequi beatae! Iure voluptatum fugit sit tenetur saepe eos,
-          aperiam labore magni temporibus esse possimus iste eligendi, ipsa
-          aliquid velit?
-        </p>
+        <h1>{data?.attributes?.title}</h1>
+        <span className="price">${data?.attributes?.price}</span>
+        <p>{data?.attributes?.desc}</p>
         <div className="quantity">
           <button
             onClick={() => setQuantity(quantity === 1 ? 1 : quantity - 1)}
