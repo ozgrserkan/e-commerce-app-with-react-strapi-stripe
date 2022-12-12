@@ -4,24 +4,43 @@ import "./Product.scss";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import BalanceIcon from "@mui/icons-material/Balance";
+import useFetch from "../../hooks/useFetch";
+import { useParams } from "react-router-dom";
 
 const Product = () => {
-  const [selectedImg, setSelectedImg] = useState(0);
+  const id = useParams().id;
+  const [selectedImg, setSelectedImg] = useState("im");
   const [quantity, setQuantity] = useState(1);
-  const images = [
-    "https://images.pexels.com/photos/7533345/pexels-photo-7533345.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    "https://images.pexels.com/photos/9594952/pexels-photo-9594952.jpeg?auto=compress&cs=tinysrgb&w=1600",
-  ];
-
+  const { data, loading, erro } = useFetch(`/products/${id}?populate=*`);
   return (
     <div className="product">
       <div className="left">
         <div className="images">
-          <img src={images[0]} alt="" onClick={(e) => setSelectedImg(0)} />
-          <img src={images[1]} alt="" onClick={(e) => setSelectedImg(1)} />
+          <img
+            src={
+              process.env.REACT_APP_UPLOAD_URL +
+              data?.attributes?.img?.data?.attributes?.url
+            }
+            alt=""
+            onClick={(e) => setSelectedImg("img")}
+          />
+          <img
+            src={
+              process.env.REACT_APP_UPLOAD_URL +
+              data?.attributes?.img2?.data?.attributes?.url
+            }
+            alt=""
+            onClick={(e) => setSelectedImg("img2")}
+          />
         </div>
         <div className="mainImg">
-          <img src={images[selectedImg]} alt="" />
+          <img
+            src={
+              process.env.REACT_APP_UPLOAD_URL +
+              data?.attributes[selectedImg]?.data?.attributes?.url
+            }
+            alt=""
+          />
         </div>
       </div>
       <div className="right">
