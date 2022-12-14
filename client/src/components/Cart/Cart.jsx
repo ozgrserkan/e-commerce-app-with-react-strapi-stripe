@@ -18,6 +18,7 @@ const Cart = () => {
   const stripePromise = loadStripe(
     "pk_test_51K6wdTFUcgfXJqjzEZs864EsPZt4lfUq7Kvt0HAWgQB9BigvP4l97tSkS4HTrOmm0JVthvNkiluEDbgwfR2Ly3UJ00nMAyUZas"
   );
+
   const handlePayment = async () => {
     try {
       const stripe = await stripePromise;
@@ -31,7 +32,7 @@ const Cart = () => {
       console.log(err);
     }
   };
-  console.log(products);
+
   return (
     <div className="cart">
       <h1>Products in your cart</h1>

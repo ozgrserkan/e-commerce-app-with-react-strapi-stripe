@@ -30,17 +30,17 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
       );
 
       const session = await stripe.checkout.sessions.create({
-        shipping_address_collection: {allowed_countries: ['US', 'CA']},
+        shipping_address_collection: { allowed_countries: ["US", "CA"] },
         payment_method_types: ["card"],
         mode: "payment",
-        success_url: process.env.CLIENT_URL+"?success=true",
-        cancel_url: process.env.CLIENT_URL+"?success=false",
+        success_url: process.env.CLIENT_URL + "?success=true",
+        cancel_url: process.env.CLIENT_URL + "?success=false",
         line_items: lineItems,
       });
 
       await strapi
         .service("api::order.order")
-        .create({ data: {  products, stripeId: session.id } });
+        .create({ data: { products, stripeId: session.id } });
 
       return { stripeSession: session };
     } catch (error) {
